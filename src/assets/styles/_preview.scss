@@ -1,0 +1,242 @@
+@use "./variables" as *;
+
+.preview-area {
+  .preview-container {
+    width: 400px;
+    position: fixed;
+    top: 120px;
+    max-width: -webkit-fill-available;
+    right: unset;
+  }
+
+  .preview-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .mobile-header {
+    border-radius: 40px 40px 0 0;
+
+    img {
+      width: 100%;
+      height: 88px;
+      object-fit: cover;
+      object-position: left;
+    }
+  }
+
+  .mobile-preview {
+    border: 7px solid #fff;
+    border-radius: 40px;
+    box-shadow: $box-shadow2;
+    max-width: 380px;
+    margin: auto;
+    background-color: #eae6df;
+    position: relative;
+    height: 700px;
+    max-height: 700px; // 100vh;
+
+    font-family: "PlusJakartaSans", "DMSans", Inter, -apple-system;
+
+    &:before {
+      position: absolute;
+      width: 6px;
+      height: 68px;
+      left: -6px;
+      top: 130px;
+      content: "";
+      box-shadow: $box-shadow2;
+      /* Inside auto layout */
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+      z-index: 2;
+    }
+
+    &:after {
+      position: absolute;
+      width: 6px;
+      height: 60px;
+      left: calc(100% + 7px);
+      top: 120px;
+      background: #ffffff;
+      border-radius: 0px 6px 6px 0px;
+      flex-grow: 0;
+      z-index: 4;
+      content: "";
+      box-shadow: $box-shadow2;
+    }
+  }
+
+  .message-container {
+    padding: 18px;
+    min-height: 400px;
+    background: #e9e6df;
+    position: relative;
+    z-index: 2;
+
+    border-radius: 40px;
+  }
+
+  .message-bubble {
+    background-color: #fff;
+    border-radius: 0 12px 12px 12px;
+    padding: 10px;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      left: -5px;
+      top: 0px;
+      width: 6px;
+      height: 11px;
+      border-radius: 12px;
+      content: "";
+      box-shadow: $box-shadow2;
+      background-image: url("/src/assets/images/message-bubble.svg");
+      background-repeat: no-repeat;
+    }
+  }
+
+  .message-tail {
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 6px;
+    height: 11px;
+  }
+
+  .message-text {
+    font-size: $font-size-regular;
+    line-height: 21px;
+    color: $secondary-color;
+    margin-bottom: 12px;
+  }
+
+  .message-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-small;
+    color: #666;
+  }
+
+  .message-time {
+    font-size: 10px;
+    color: #7e7e7e;
+  }
+
+  .message-buttons {
+    margin-top: 12px;
+    // margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .message-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: #fff;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    color: #00a5f4;
+    font-size: $font-size-regular;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #00a7f417;
+    }
+  }
+
+  .mobile-buttons {
+    top: 35px;
+    position: absolute;
+    top: 120px;
+    left: -13px;
+    width: 6px;
+    height: 60px;
+
+    span {
+      width: 6px;
+      height: 30px;
+      display: block;
+      background: #ffffff;
+      border-radius: 6px 0px 0px 6px;
+      margin-bottom: 8px;
+      box-shadow: $box-shadow2;
+    }
+  }
+
+  .message-input {
+    margin: 0 10px 10px;
+    height: 46px;
+    background: #ffffff;
+    border-radius: 46px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 20px);
+    z-index: 2;
+    border-top: 1px solid #e9e6df;
+  }
+
+  @media (max-width: 1599px) {
+    .preview-container {
+      top: 40px;
+      right: unset;
+      .mobile-preview {
+        height: calc(100vh - 80px);
+        min-height: 300px;
+        max-width: 320px;
+      }
+    }
+
+    .message-body {
+      max-height: calc(100vh - 260px);
+      max-height: calc(100vh - 280px);
+      overflow-x: clip; //auto;
+      overflow-y: auto;
+      margin-bottom: -10px;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none; /* Hides scrollbar for Chrome, Safari, Edge */
+      }
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .preview-container {
+      width: 330px;
+      right: 10px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .preview-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      right: 0;
+    }
+  }
+}
+
+.direction-rtl {
+  &.preview-area .preview-container {
+    right: 10%;
+
+    @media (max-width: 991px) {
+      top: 40px;
+      right: 10%;
+    }
+  }
+}
