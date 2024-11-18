@@ -1,8 +1,8 @@
 # Arabot Project
 
 A template message tool.
-The app should allow users to create and preview customizable template messages with sec1ons like header,
-body, footer, and bu>ons, along with category selec1on
+
+The app should allow users to create and preview customizable template messages with sections like header, body, footer, and buttons, along with category selection.
 
 ## Customize configuration
 
