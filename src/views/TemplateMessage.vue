@@ -1,6 +1,6 @@
 <template>
   <div class="template-message-app" :class="{ 'smallScreen': isSmallScreen }">
-    <!-- isSmallScreen:  {{ isSmallScreen }} -->
+    <!-- <pre class="bg-white">  {{ store.getAavailableComponents }}</pre> -->
     <TemplateHeader :pageTitle="currentPageTitle" />
     <BreadcrumbNav :pageTitle="currentPageTitle" />
 
@@ -10,16 +10,16 @@
 
           <main class="main-content" :class="store.template.language === 'ar_SA' ? 'direction-rtl' : ''">
             <div class="template-form-container">
-              <form class="template-form">
+              <form class="template-form needs-validation" novalidate >
                 <TemplateDetails />
                 <TemplateCategory />
 
                 <!-- FormSections -->
                 <div class="form-section">
-                  <HeaderSection />
-                  <BodySection />
-                  <FooterSection />
-                  <ButtonsSection />
+                  <HeaderSection v-if="store.getAavailableComponents?.includes('HEADER')" />
+                  <BodySection v-if="store.getAavailableComponents?.includes('BODY')" />
+                  <FooterSection v-if="store.getAavailableComponents?.includes('FOOTER')" />
+                  <ButtonsSection v-if="store.getAavailableComponents?.includes('BUTTONS')" />
                 </div>
                 <!-- FormSections -->
 

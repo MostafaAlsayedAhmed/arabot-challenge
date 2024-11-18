@@ -25,9 +25,10 @@ function handleFileUploader(e) {
 
 
             <div class="w-100 py-4 text-center">
-                <label for="file"> {{ $t('header.imageUpload.replaceInput') }}</label>
-                <input type="file" id="uploadFile2" style="opacity: 0.5; cursor:pointer; max-width: 100px;"
-                    class="upload-input mx-auto mt-3 d-block stretched-link" @change="handleFileUploader"
+                <button class="btn btn-outline-primary" type="button" > {{ $t('header.imageUpload.replaceInput') }}</button>
+                <label for="file" class="visually-hidden"> {{ $t('header.imageUpload.replaceInput') }}</label>
+                <input type="file" id="uploadFile2" style="opacity: 0; cursor:pointer; width: 0; height: 0;"
+                    class="upload-input d-block stretched-link" @change="handleFileUploader"
                     accept="image/jpeg, image/jpg, image/png" />
             </div>
         </div>

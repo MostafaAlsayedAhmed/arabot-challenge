@@ -5,17 +5,20 @@
     <p class="section-description">Define your template name and language</p>
 
     <div class="section-content">
-      <div class="form-group">
+      <div class="form-group has-validation position-relative">
         <label for="templateName" class="form-label">
           Template Name
           <span class="required-asterisk">*</span>
         </label>
-        <input id="templateName" v-model="store.template.name" @input="generateIdentifier" type="text"
-          class="form-input" required aria-required="true" placeholder="Template Name" />
+        <input id="templateName" v-model="templateName" @input="generateIdentifier" @blur="hideNameReachedLimitHint"
+          @keydown.enter.prevent type="text" class="form-input" required aria-required="true"
+          placeholder="Template Name (Maximum 20 characters)" />
+        <!-- <small v-show="nameReachedLimit" class="input-error text-danger ">Maximum 20 characters</small> -->
+        <div :class="{ 'd-block': nameReachedLimit }" class="invalid-tooltip ">Maximum 20 characters </div>
       </div>
       <div class="form-group">
         <label for="language" class="form-label">
-          Language  
+          Language
           <span class="required-asterisk">*</span>
         </label>
         <div class="select-wrapper locale-changer position-relative">
@@ -26,26 +29,41 @@
           </select>
         </div>
       </div>
-      
+
     </div>
   </section>
 
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n'
 import { useTemplateStore } from '@/stores/templateStore';
 const { t, locale } = useI18n({ useScope: 'global' })
 const store = useTemplateStore();
 
+const templateName = ref('');
+const nameReachedLimit = ref(false);
 
-function generateIdentifier() { 
-  let name = store.template.name;
-  // Convert to lowercase and replace spaces with underscores
-  store.template.name = name.toLowerCase().replace(/ /g, '_');
+onMounted(async () => {
+  await nextTick();
+  templateName.value = store.getTemplateName;
+});
+
+function generateIdentifier() {
+  nameReachedLimit.value = (templateName.value?.length > 20) ? true : false;
+
+  if (templateName.value?.length <= 20) {
+    templateName.value = templateName.value.toLowerCase().replace(/ /g, '_');
+    store.setName(templateName.value);
+  } else {
+    templateName.value = templateName.value.substring(0, 20).toLowerCase().replace(/ /g, '_');
+  }
 }
 
+const hideNameReachedLimitHint = () => {
+  nameReachedLimit.value = false;
+};
 watch(
   () => store.template.language,
   (language) => {

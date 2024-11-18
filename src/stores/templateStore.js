@@ -1,20 +1,37 @@
 import { defineStore } from 'pinia';
-import templateData from '@/data/template.json'; // Import JSON file
-import { downloadJSON } from "@/utils/fileDownloader.js";  // Import JSON file
+// For the full data "template2.json", for the omitted data (Missing Sections) "template.json"
+import templateData from '@/data/template2.json';
+import { downloadJSON } from "@/utils/fileDownloader.js";  // Import JSON-file Downloader 
 
 
 
 export const useTemplateStore = defineStore('templateStore', {
+    // persist: true, //pinia-plugin-persistedstate
+
     state: () => ({
         template: {}, // Initialize as an empty object
         isThereButtonsSection: 'true',
         availableCategories: ['marketing', 'utility'],
+
+        formErrors: {
+            templateName: false, //required 
+            headerText: false, //required if there is header section
+            bodyText: false, //required 
+
+            buttons: [{
+                phone_number: false, //required & should be valid format if the buttonType is 'CALL'
+                url: false, //required & should be valid format if the buttonType is 'URL'
+            }],
+        }
     }),
 
     getters: {
         getTemplate: (state) => state.template,
+        getTemplateName: (state) => state.template?.name,
         getButtonsStatus: (state) => state.isThereButtonsSection,
         getCategories: (state) => state.availableCategories,
+        getAavailableComponents: (state) => state.template?.components?.map(comp => comp.type),
+
         getTemplateMessage: (state) => {
             // return state.template
             function getComponent(targetType) {
@@ -46,8 +63,10 @@ export const useTemplateStore = defineStore('templateStore', {
 
     actions: {
         async loadTemplate() {
-            // Assign imported JSON data to the state
-            this.template = templateData;
+            this.template = templateData;  // Assign imported JSON data to the state
+        },
+        setName(name) {
+            this.template.name = name;
         },
         selectCategory(category) {
             this.template.category = category;
@@ -80,7 +99,7 @@ export const useTemplateStore = defineStore('templateStore', {
                 text: "",
                 value: {
                     url: "",
-                    phone_number: "", 
+                    phone_number: "",
                 },
             }
             const buttonsComponent = this.template.components.find((component) => component.type === 'BUTTONS');
@@ -108,6 +127,7 @@ export const useTemplateStore = defineStore('templateStore', {
         },
 
         saveTemplate() {
+
             const finalTemplateObject = JSON.parse(JSON.stringify(this.getTemplate));
             const buttonsComponent = finalTemplateObject.components.find((component) => component.type === 'BUTTONS');
 
@@ -115,7 +135,7 @@ export const useTemplateStore = defineStore('templateStore', {
                 if (btn.type === 'URL') {
                     btn.value = { url: btn.value.url }
                 }
-                if (btn.type === 'PHONE_NUMBER') {
+                if (btn.type === 'CALL') {
                     btn.value = { phone_number: btn.value.phone_number }
                 }
                 console.log(btn);
@@ -124,7 +144,9 @@ export const useTemplateStore = defineStore('templateStore', {
             const confirmed = confirm(`Are you sure that you want to download ${this.template.name} template?`);
             if (confirmed) downloadJSON(finalTemplateObject, `${this.template.name}_template.json`);
 
-            console.log('Template saved!!!');
+            console.log('The Template Saved Successfully! 🎉'); // 
         }
+
+
     },
 });

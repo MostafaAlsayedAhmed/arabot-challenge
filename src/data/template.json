@@ -2,34 +2,10 @@
   "language": "en_US",
   "name": "template_name",
   "category": "MARKETING",
-  
   "components": [
-    {
-      "type": "HEADER",
-      "format": "IMAGE",
-      "value": {
-        "url": "image_url"
-      }
-    },
     {
       "type": "BODY",
       "text": ""
-    },
-    {
-      "type": "FOOTER",
-      "text": ""
-    },
-    {
-      "type": "BUTTONS",
-      "buttons": [
-        {
-          "type": "URL",
-          "text": "",
-          "value": {
-            "url": "https://arabot.io"
-          }
-        }
-      ]
     }
   ]
 }

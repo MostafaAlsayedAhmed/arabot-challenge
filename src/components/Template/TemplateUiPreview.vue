@@ -14,18 +14,21 @@
 
         <div class="message-area message-bubble"
           :style="{ direction: store.template.language === 'ar_SA' ? 'rtl' : '' }">
-          <div class="message-body">
-            <img
-              v-show="store.getTemplateMessage.headerType == 'IMAGE' && store.getTemplateMessage.headerImageUrl?.includes('http')"
-              :src="store.getTemplateMessage.headerImageUrl" width="290" height="200" style="object-fit: cover;"
-              class="img--thumbnail preview rounded w-100 mb-2" alt="Template Header Image" />
+          <div class="message-body ">
+            <div v-show="store.getTemplateMessage.headerType == 'IMAGE'" class="image rounded overflow-hidden  mb-2">
+              <img v-if="store.getTemplateMessage.headerImageUrl?.includes('http')"
+                :src="store.getTemplateMessage.headerImageUrl" width="290" height="200" style="object-fit: cover;"
+                class="img--thumbnail preview w-100" alt="Template Header Image" />
+              <div v-else style="height: 200px; background: #e4e5ef;" />
+            </div>
+
 
 
             <h2 v-show="store.getTemplateMessage.headerType == 'TEXT'" class="message-header text-capitalize fs-6">
-              {{ store.getTemplateMessage.headerText  || $t('preview.header') }}
+              {{ store.getTemplateMessage.headerText || $t('preview.header') }}
             </h2>
-            <div class="message-text">
 
+            <div class="message-text">
               <div v-if="store.getTemplateMessage.bodyText">
                 <p v-for="(line, lineIndex) in store.getTemplateMessage.bodyText?.split('\n')" :key="lineIndex"
                   class="mb-2">{{ line }}
@@ -35,7 +38,8 @@
             </div>
 
             <div class="message-footer">
-              <span class="powered-by">{{ store.getTemplateMessage.footerText || $t('preview.footer') }} </span>
+              <span v-if="store.getAavailableComponents?.includes('FOOTER')" class="powered-by">{{
+                store.getTemplateMessage.footerText || $t('preview.footer') }} </span>
               <span class="message-time">{{ $t('preview.time') }}</span>
             </div>
 
@@ -49,8 +53,7 @@
                     {{ btn.buttonText }}
                   </a>
                   <a v-if="btn.buttonActionType === 'CALL' && btn.buttonValue.phone_number?.length && btn.buttonText?.length"
-                    :href="`callto: ${ btn.buttonValue.phone_number}`" target="_blank"
-                    class="message-button">
+                    :href="`callto: ${btn.buttonValue.phone_number}`" target="_blank" class="message-button">
                     <img src="/src/assets/images/phone.svg" width="12" height=" 12" alt="number">
                     {{ btn.buttonText }}
                   </a>

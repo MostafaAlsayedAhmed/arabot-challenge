@@ -24,7 +24,7 @@
 
         <div v-show="store.isThereButtonsSection == 'true'">
           <button @click.stop.prevent.self="store.addButton()" id="addNewButton"
-            class="button--option  mt-2 mb-4 mt-md-2 mb-md-3 mx-sm-5 rounded-3 w-auto px-3 justify-content-center border btn-outline-success transition">
+            class="btn btn-outline-success mt-2 mb-4 mt-md-2 mb-md-3 mx-sm-5 rounded-3 w-auto px-3 justify-content-center border transition">
             {{ $t('buttons.add') }} </button>
         </div>
       </div>
@@ -64,8 +64,7 @@
                     <input @keydown.enter.prevent :id="'buttonText' + actionButtonIndex" v-model="actionButton.text"
                       type="text" class="form-input" required aria-required="true"
                       :placeholder="actionButton.type === 'URL' ? $t('buttons.url.textHelp') : $t('buttons.call.textHelp')" />
-                  </div>
-
+                  </div> 
                 </div>
 
                 <div class="col-lg-6 col-xxl-6">
@@ -74,9 +73,10 @@
                       {{ $t('buttons.url.title') }}
                       <span class="required-asterisk">*</span>
                     </label>
-                    <input @keydown.enter.prevent :id="'buttonUrl' + actionButtonIndex" v-model="actionButton.value.url"
+                    <input  @keydown.enter.prevent :id="'buttonUrl' + actionButtonIndex" v-model="actionButton.value.url"
                       type="url" class="form-input" style="direction: ltr;" required aria-required="true" />
-                  </div>
+                    </div>
+                    
 
                   <div v-if="actionButton.type === 'CALL'" class="form-group">
                     <label for="buttonPhoneNumber" class="form-label">
@@ -87,6 +87,9 @@
                     <PhoneNumber :actionButtonIndex="`${actionButtonIndex}`" />
 
                   </div>
+
+                  <!-- :disabled="actionButton.text.length == 0" -->
+                  <!-- <small id="error" class="input-error">Invalid phone number</small> -->
                 </div>
               </div>
             </div>
@@ -128,7 +131,6 @@ const theComponent = ref({
         "phone_number": "+96279XXXXXXX"
       }
     }
-
   ]
 });
 
@@ -160,8 +162,7 @@ select.form-select {
   width: 100%;
   padding-right: 30px;
   text-indent: 10px;
-  /*  text-align: left;
-  direction: ltr;*/
+  /* text-align: left;  direction: ltr;*/
 }
 
 .form-select::after {
@@ -172,5 +173,10 @@ select.form-select {
   transform: translateY(-50%);
   pointer-events: none;
   color: #000;
+} 
+.input-error {
+  color: red;
+  display: block;
+  margin-top: -15px;
 }
 </style>

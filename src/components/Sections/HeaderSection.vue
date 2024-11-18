@@ -2,7 +2,7 @@
   <section class="form-section header-section">
     <h2 class="section-title">{{ $t('header.title') }}</h2>
     <p class="section-description"> {{ $t('header.description') }} </p>
-
+  
     <div class="section-content" v-if="theComponent.format">
 
       <div class="header-options p-1">
@@ -59,7 +59,11 @@ watch(() => theComponent.value, (newVal) => {
   // console.log('component change', newVal);
   theComponent.value = store.template.components?.find(component => component.type == 'HEADER')
 });
-
+onMounted(async () => {
+  await nextTick();
+  theComponent.value = store.template.components?.find(component => component.type == 'HEADER')
+  // console.log("BUTTONS: ", theComponent.value); //buttons
+})
 
 function updateHeaderText(e) {
   const value = e.target.value; // console.log('update', value);
