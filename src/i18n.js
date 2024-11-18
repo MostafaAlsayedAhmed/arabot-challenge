@@ -1,5 +1,4 @@
-import { createI18n } from 'vue-i18n';
-// TODO: split the languages into json files, 
+import { createI18n } from 'vue-i18n'; 
 import enLocale from '@/data/locales/en_US.json';
 import arLocale from '@/data/locales/ar_SA.json';
 

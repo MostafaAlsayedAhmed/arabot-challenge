@@ -75,7 +75,7 @@
                       <span class="required-asterisk">*</span>
                     </label>
                     <input @keydown.enter.prevent :id="'buttonUrl' + actionButtonIndex" v-model="actionButton.value.url"
-                      type="url" class="form-input direction-rtl" required aria-required="true" />
+                      type="url" class="form-input" style="direction: ltr;" required aria-required="true" />
                   </div>
 
                   <div v-if="actionButton.type === 'CALL'" class="form-group">
@@ -136,7 +136,7 @@ const buttonType = ref('');
 const phoneVumber = ref('');
 buttonType.value = computed(() => store.buttonType)
 
- 
+
 
 function removeBtn(actionButtonIndex) {
   const confirmed = confirm(`Are you sure that you want to remove button NO. ${actionButtonIndex + 1}?`);

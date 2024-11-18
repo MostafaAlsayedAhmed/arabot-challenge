@@ -1,6 +1,13 @@
-# arabot-project
+# Arabot Project
 
-This template should help get you started developing with Vue 3 in Vite.
+A template message tool.
+The app should allow users to create and preview customizable template messages with sec1ons like header,
+body, footer, and bu>ons, along with category selec1on
+
+## Customize configuration
+
+See [Demo in Netlify](https://template-message-challenge.netlify.app/).
+
 
 ## Recommended IDE Setup
 
