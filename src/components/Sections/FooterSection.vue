@@ -1,15 +1,13 @@
 <template>
-
-
   <section class="form-section footer-section">
-    <h2 class="section-title">Footer</h2>
-    <p class="section-description">
-      Use this section for optional details like disclaimers, contact info, or additional context.
+    <h2 class="section-title">{{ $t('footer.title') }}</h2>
+    <p class="section-description">{{ $t('footer.description') }}
+
     </p>
     <div class="form-group section-content">
-      <label for="footerText" class="visually-hidden">Footer Text</label>
+      <label for="footerText" class="visually-hidden">{{ $t('footer.title') }}</label>
       <input id="footerText" v-model="theComponent.text" type="text" class="form-input"
-        placeholder="Footer text, such as disclaimers or additional notes. e.g. 'Terms and conditions apply.'" />
+        :placeholder="$t('footer.help')" />
     </div>
   </section>
 
@@ -18,21 +16,15 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
-
 import { useTemplateStore } from '@/stores/templateStore';
+
 const store = useTemplateStore();
-
-const theComponent = ref({
-  "type": "FOOTER", "text": "Powered by arabot"
-})
-
+const theComponent = ref({ "type": "FOOTER", "text": "Powered by arabot" })
 const footerText = ref("");
 
 onMounted(async () => {
   await nextTick();
   theComponent.value = store.template.components?.find(component => component.type == 'FOOTER')
   // console.log("FOOTER: ", theComponent.value);
-})
-
-
+}) 
 </script>

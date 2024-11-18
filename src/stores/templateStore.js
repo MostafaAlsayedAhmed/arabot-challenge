@@ -80,8 +80,7 @@ export const useTemplateStore = defineStore('templateStore', {
                 text: "",
                 value: {
                     url: "",
-                    phone_number: "",
-                    countryCode: "",
+                    phone_number: "", 
                 },
             }
             const buttonsComponent = this.template.components.find((component) => component.type === 'BUTTONS');
@@ -117,7 +116,7 @@ export const useTemplateStore = defineStore('templateStore', {
                     btn.value = { url: btn.value.url }
                 }
                 if (btn.type === 'PHONE_NUMBER') {
-                    btn.value = { phone_number: btn.value.countryCode + '' + btn.value.phone_number }
+                    btn.value = { phone_number: btn.value.phone_number }
                 }
                 console.log(btn);
             })

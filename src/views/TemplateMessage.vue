@@ -27,8 +27,9 @@
             </div>
 
             <button v-if="isSmallScreen" @click="showPreviewMobile = !showPreviewMobile"
-              class="preview-mobile-btn   d-block d-lg-none transition">
-              {{ showPreviewMobile ? 'Show' : 'Hide' }} <br> Preview
+              class="preview-mobile-btn d-block d-lg-none transition">
+              {{ showPreviewMobile ? $t('previewButton.show') : $t('previewButton.hide') }} <br> {{
+                $t('previewButton.title') }}
             </button>
 
           </main>

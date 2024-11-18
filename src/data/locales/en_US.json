@@ -1,0 +1,91 @@
+{
+    "templateDetails": {
+        "title": "Template Details",
+        "name": "Template Name",
+        "nameHelp": "Template Name (Maximum 50 charachter) ",
+        "language": "Language",
+        "description": "Define your template name and language"
+    },
+    "category": {
+        "title": "Category",
+        "description": "Choose your message template",
+        "marketing": {
+            "title": "Marketing",
+            "description": "Send promotions and information about your products, services or business."
+        },
+        "utility": {
+            "title": "Utility",
+            "description": "Send messages about an existing order or account."
+        }
+    },
+    "header": {
+        "title": "Header",
+        "description": "Highlight your brand here, use images or videos, to stand out",
+        "options": {
+            "none": "None",
+            "text": "Text",
+            "image": "Image"
+        },
+        "textInput": "Header Text",
+        "textHelp": "Enter the text for your header",
+        "imageUpload": {
+            "description": "Drag and drop file here to upload or",
+            "browse": "Browse",
+            "types": "Allowed types .jpeg, .jpg, .png",
+            "selectInput": "Select File",
+            "replaceInput": "Replace the image"
+        }
+    },
+    "body": {
+        "title": "Body",
+        "description": "Enter the text of your message in the language you've selected",
+        "help": " Main content of the message. e.g. \"Welcome to our service!\""
+    },
+    "footer": {
+        "title": "Footer",
+        "description": " Use this section for optional details like disclaimers, contact info, or additional context.",
+        "help": "Enter optional footer text (e.g., disclaimers)"
+    },
+    "buttons": {
+        "title": "Buttons",
+        "description": "Create buttons that let your customers respond to your message or take an action.",
+        "add": "Add Button",
+        "remove": "Remove Button",
+        "options": {
+            "none": "None",
+            "cta": "Call to actions"
+        },
+        "types": {
+            "title": "Button Type",
+            "select": "-Select-",
+            "url": "Visit Website",
+            "call": "Phone Number"
+        },
+        "text": {
+            "title": "Button Text"
+        },
+        "url": {
+            "title": "Website URL",
+            "help": "https://arabot.io/",
+            "textHelp": "Offer Details"
+        },
+        "call": {
+            "title": "Phone Number",
+            "help": "+96 279 XXXXXXX",
+            "textHelp": "Call Us"
+        }
+    },
+    "previewButton": {
+        "title": "Preview",
+        "show": "Show",
+        "hide": "Hide"
+    },
+    "preview": {
+        "title": "Preview",
+        "header": "Message Title for Preview",
+        "body": " Your message will appear here",
+        "footer": "Powered by arabot",
+        "time": "14:05 PM"
+    },
+    "saveTemplate": "Save"
+}

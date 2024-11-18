@@ -3,28 +3,28 @@
     <h2 class="section-title">
       <slot name="title"></slot>
     </h2>
-    
+
     <p class="section-description">
       <slot name="description"></slot>
     </p>
 
 
-    <div class="selector-options d-flex flex-column section-content"> 
-      <template v-for="(option, optionIndex) in options"> 
+    <div class="selector-options d-flex flex-column section-content">
+      <template v-for="(option, optionIndex) in options">
         <div class="selector-option d-flex" :class="{ 'selected': store.template.category === option?.toUpperCase() }"
           @click="store.selectCategory(option?.toUpperCase())" tabindex="0" role="radio"
           :aria-checked="store.template.category === option?.toUpperCase()">
-        
+
           <div class="selector-icon-container">
-            <img width="24" height="24" :src="`/src/assets/images/${option}.svg`" :alt="`${option} icon`" />
+            <img width="24" height="24" :src="`/assets/images/categories/${option}.svg`" :alt="`${option} icon`" />
           </div>
 
           <div class="selector-details">
-            <h3 class="selector-title">{{ t(`category.${option}.title`) }}</h3>
-            <p class="selector-description mb-0">{{ t(`category.${option}.description`) }} </p>
+            <h3 class="selector-title">{{ $t(`category.${option}.title`) }}</h3>
+            <p class="selector-description mb-0">{{ $t(`category.${option}.description`) }} </p>
           </div>
         </div>
-      </template> 
+      </template>
 
     </div>
   </section>
@@ -33,9 +33,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { useTemplateStore } from '@/stores/templateStore';
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n({ useScope: 'global' })
+import { useTemplateStore } from '@/stores/templateStore'; 
 const store = useTemplateStore();
 
 defineProps(['options'])

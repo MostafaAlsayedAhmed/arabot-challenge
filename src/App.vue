@@ -1,17 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-// Load the template data when the component mounts 
+import { RouterLink, RouterView } from 'vue-router' 
 </script>
 
 <template>
-  <header v-if="0">
-    <div class="wrapper green">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <!-- <header v-if="0"> <nav> <RouterLink to="/">Template</RouterLink> <RouterLink to="/templates">  List</RouterLink> </nav> </header> -->
   <RouterView />
 </template>
 
@@ -52,45 +44,5 @@ nav a:first-of-type {
 </style>
 
 <style>
-@import './assets/styles/main.scss';
+@import '/assets/styles/main.scss';
 </style>
-
-<script>
-const obbbg = {
-  "language": "en_US", // Language for the template: "en_US" for English or  "ar_SA" for Arabic.
-  "name": "template_name", // The name identifier for the template.
-  "category": "MARKETING", // Category of the template: either "MARKETING" or  "UTILITY".
-  "components": [
-    {
-      "type": "HEADER",
-      "format": "IMAGE", // Options: "IMAGE" or "TEXT".
-      "value": {
-        "url": "image_url" // Required if format is "IMAGE". Example: { "url":"https://example.com/image.jpg" }
-      }
-      // If format is "TEXT", use "value": { "text": "header_text" } instead.
-    },
-    {
-      "type": "BODY",
-      "text": "body_text" // Required: Main content of the message. Example:"Welcome to our service!"
-    },
-    {
-      "type": "FOOTER",
-      "text": "footer_text" // Optional: Footer text, such as disclaimers or additional notes.
-      // Example: "Terms and conditions apply."
-    },
-    {
-      "type": "BUTTONS",
-      "buttons": [
-        {
-          "type": "URL", // Options: "URL" or "CALL".
-          "text": "button_text", // Button display text. Example: "Visit our site" or "Contact Us".
-          "value": {
-            "url": "https://arabot.io" // Required if type is "URL". Example: {"url": "https://arabot.io" }
-          }
-          // If type is "CALL", use "value": { "phone_number": "+96279XXXXXXX" } instead.
-        }
-      ]
-    }
-  ]
-}
-</script>

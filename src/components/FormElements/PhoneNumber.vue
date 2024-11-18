@@ -21,10 +21,10 @@ const inputOptions = {
 </script>
 
 <template>
-
     <div class="phone-input-wrapper flex-md-row">
-        <VueTelInput v-model="phone" mode="international" @keydown.enter.prevent @input="store.setPhoneNumber(actionButtonIndex, phone)"
-            styleClasses="gap-2 border-0" :inputOptions="inputOptions" />
+        <VueTelInput v-model="phone" mode="international" @keydown.enter.prevent
+            @input="store.setPhoneNumber(actionButtonIndex, phone)" styleClasses="gap-2 border-0"
+            :inputOptions="inputOptions" />
     </div>
 </template>
 

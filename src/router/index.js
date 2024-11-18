@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Template',
       component: TemplateMessage,
     },
     {
@@ -15,7 +15,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/TemplatesList.vue'),
+      component: () => import('../views/__TemplatesList.vue'),
     },
   ],
 })

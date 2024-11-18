@@ -1,6 +1,8 @@
 <template>
-    <button class="primary-button save-button d-flex align-items-center transition" :class="marginClass" @click.prevent="store.saveTemplate">
-        <img width="16" src="/src/assets/images/save.svg" alt="save-icon"> Save 
+    <button class="primary-button save-button d-flex align-items-center transition" :class="marginClass"
+        @click.prevent="store.saveTemplate">
+        <img width="16" src="/src/assets/images/save.svg" alt="save-icon"> {{ $t('saveTemplate') }}
+
     </button>
 </template>
 
