@@ -29,7 +29,7 @@
         <label for="headerText" class="form-label"> {{ $t('header.options.text') }} <span
             class="required-asterisk">*</span></label>
         <input id="headerText" v-model="headerText" @input="updateHeaderText" type="text" class="form-input"
-          :placeholder="t('header.textHelp')" required />
+          :placeholder="$t('header.textHelp')" required />
       </div>
 
       <FileUploader v-if="theComponent.format === 'IMAGE'" :theComponent="theComponent"
@@ -39,11 +39,11 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, nextTick } from 'vue'; 
-import { useTemplateStore } from '@/stores/templateStore'; 
+import { ref, watch, onMounted, nextTick } from 'vue';
+import { useTemplateStore } from '@/stores/templateStore';
 import FileUploader from '@/components/FormElements/FileUploader.vue';
-const store = useTemplateStore(); 
- 
+const store = useTemplateStore();
+
 const theComponent = ref({ "type": "HEADER", "format": "", "value": "" })
 
 const imageUrl = ref('');
@@ -72,13 +72,11 @@ function updateHeaderImage(e) {
 
   if (file) {
     imageUrl.value = URL.createObjectURL(file); // Generate a local preview URL
-    theComponent.value.value = { "url": imageUrl.value }; 
+    theComponent.value.value = { "url": imageUrl.value };
   } else {
     imageUrl.value = null; // if no file is selected
   }
-}
-
-
+}  
 </script>
 
 <style scoped>
