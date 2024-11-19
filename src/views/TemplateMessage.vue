@@ -1,6 +1,6 @@
 <template>
   <div class="template-message-app" :class="{ 'smallScreen': isSmallScreen }">
-    <!-- <pre class="bg-white">  {{ store.getAavailableComponents }}</pre> -->
+     
     <TemplateHeader :pageTitle="currentPageTitle" />
     <BreadcrumbNav :pageTitle="currentPageTitle" />
 
@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-8">
 
-          <main class="main-content" :class="store.template.language === 'ar_SA' ? 'direction-rtl' : ''">
+          <main class="main-content" :class="store.template?.language === 'ar_SA' ? 'direction-rtl' : ''">
             <div class="template-form-container">
               <form class="template-form needs-validation" novalidate>
                 <TemplateDetails />
@@ -97,7 +97,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", checkWindowSize); // Clean up the event listener 
+  window.removeEventListener("resize", checkWindowSize); // To clean up the event listener 
 }) 
 </script>
 

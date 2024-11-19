@@ -25,13 +25,13 @@
         <div v-show="store.isThereButtonsSection == 'true'">
           <button @click.stop.prevent.self="store.addButton()" id="addNewButton"
             class="btn btn-outline-success mt-2 mb-4 mt-md-2 mb-md-3 mx-sm-5 rounded-3 w-auto px-3 justify-content-center border transition">
-           + {{ $t('buttons.add') }} </button>
+            + {{ $t('buttons.add') }} </button>
         </div>
       </div>
 
       <div v-if="store.isThereButtonsSection == 'true'" class="buttons-form buttons-list">
         <template v-for="(actionButton, actionButtonIndex) in theComponent.buttons" :key="actionButtonIndex">
-          <!-- <div class="col-12 mb-3"> {{ actionButtonIndex }} {{ actionButton }} </div> -->
+         
           <div class="position-relative d-flex justify-content-between mb-3">
 
             <div class="button-row p-4 w-100">
@@ -64,7 +64,7 @@
                       type="text" class="form-input" required aria-required="true"
                       :class="{ 'is-invalid border-danger': actionButton.text.length < 1 && store.formErrors.buttons[actionButtonIndex]?.text }"
                       :placeholder="actionButton.type === 'URL' ? $t('buttons.url.textHelp') : $t('buttons.call.textHelp')" />
-                    <div class="invalid-tooltip"> Required Input </div>
+                    <div class="invalid-tooltip"> {{ $t('buttons.text.error') }} </div>
                   </div>
                 </div>
 
@@ -80,9 +80,8 @@
                       type="url" class="form-input" placeholder="https://arabot.io"
                       :class="{ 'is-invalid border-danger': !store.validUrlRegEx.test(actionButton.value.url) && store.formErrors.buttons[actionButtonIndex]?.url }"
                       style="direction: ltr;" required aria-required="true" />
-                    <!-- actionButton.value.url.length < 1  -->
 
-                    <div class="invalid-tooltip"> A valid Url is Required </div>
+                    <div class="invalid-tooltip"> {{ $t('buttons.url.error') }} </div>
                   </div>
 
 
@@ -93,7 +92,7 @@
                       <span class="required-asterisk">*</span>
                     </label>
 
-                    <PhoneNumber :actionButtonIndex="`${actionButtonIndex}`" /> 
+                    <PhoneNumber :actionButtonIndex="`${actionButtonIndex}`" />
                   </div>
 
 
@@ -114,26 +113,16 @@
 
 </template>
 
-<script setup>
-import { ref, onMounted, computed, nextTick, watch } from 'vue';
-import PhoneNumber from '@/components/FormElements/PhoneNumber.vue';
 
+<script setup>
+import { computed } from 'vue';
+import PhoneNumber from '@/components/FormElements/PhoneNumber.vue';
 import { useTemplateStore } from '@/stores/templateStore';
 const store = useTemplateStore();
 
-const theComponent = ref({
-  "type": "BUTTONS",
-  "buttons": [
-    { "type": "URL", "text": "", "value": { "url": "" } },
-    { "type": "CALL", "text": "", "value": { "phone_number": "" } }
-  ]
-});
-   
- 
-onMounted(async () => {
-  await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'BUTTONS');
-}) 
+const theComponent = computed(() =>
+  store.template.components?.find(component => component.type === 'BUTTONS') || {}
+); 
 </script>
 
 

@@ -10,7 +10,7 @@
 
 
     <div class="selector-options d-flex flex-column section-content">
-      <template v-for="(option, optionIndex) in options">
+      <template v-for="(option, optionIndex) in options" :key="optionIndex">
         <div class="selector-option d-flex" :class="{ 'selected': store.template.category === option?.toUpperCase() }"
           @click="store.selectCategory(option?.toUpperCase())" tabindex="0" role="radio"
           :aria-checked="store.template.category === option?.toUpperCase()">

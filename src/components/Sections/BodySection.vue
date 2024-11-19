@@ -10,23 +10,18 @@
         :placeholder="$t('body.help')" class="form-textarea"
         :class="{ 'is-invalid border-danger': theComponent.text.length < 5 && store.formErrors.bodyTextEmpty }"></textarea>
 
-      <div class="invalid-tooltip" style="margin-top: -25px;"> The body text is required </div>
+      <div class="invalid-tooltip" style="margin-top: -25px;"> {{ $t('body.error') }} </div>
 
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { computed } from 'vue';
 import { useTemplateStore } from '@/stores/templateStore';
 const store = useTemplateStore();
 
-const theComponent = ref({ "type": "BODY", "text": "Your message will appear here" }) 
-
-onMounted(async () => {
-  await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'BODY');
-})
-
-
+const theComponent = computed(() =>
+  store.template.components?.find(component => component.type === 'BODY') || {}
+); 
 </script>

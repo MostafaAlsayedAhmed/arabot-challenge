@@ -27,7 +27,7 @@ const inputOptions = {
             styleClasses="gap-2 border-0" />
         <div class="invalid-tooltip"
             :class="{ 'd-block': !store.validPhoneNumberRegEx.test(phone) && store.formErrors.buttons[actionButtonIndex]?.phone_number }">
-            A valid Phone Number is Required
+            {{ $t('buttons.call.error') }}
         </div>
     </div>
 </template>
@@ -52,7 +52,7 @@ const inputOptions = {
     height: 40px;
 }
 
-.vue-tel-input + .invalid-tooltip {
+.vue-tel-input+.invalid-tooltip {
     margin-left: 4rem;
 }
 </style>

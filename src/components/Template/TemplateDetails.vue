@@ -1,5 +1,4 @@
 <template>
-
   <section class="form-section" style="direction: ltr !important;">
     <h2 class="section-title">Template Details</h2>
     <p class="section-description">Define your template name and language</p>
@@ -19,8 +18,9 @@
         <div :class="{ 'd-block': nameReachedLimit }" class="invalid-tooltip">
           {{ templateName.length < 5 && store.formErrors.templateNameEmpty
             ? 'The template name is required (Min 5 characters)' : 'Maximum 20 characters' }} </div>
-
         </div>
+
+        <!-- Language Changer -->
         <div class="form-group">
           <label for="language" class="form-label">
             Language
@@ -34,10 +34,10 @@
             </select>
           </div>
         </div>
+        <!-- Language Changer -->
 
       </div>
   </section>
-
 </template>
 
 <script setup>
@@ -47,9 +47,9 @@ import { useI18n } from 'vue-i18n';
 import { useTemplateStore } from '@/stores/templateStore';
 const { t, locale } = useI18n({ useScope: 'global' })
 const store = useTemplateStore();
-
-const templateName = ref('');
+const templateName = ref(''); 
 const nameReachedLimit = ref(false);
+
 
 onMounted(async () => {
   await nextTick();
@@ -72,10 +72,8 @@ const hideNameReachedLimitHint = () => {
   nameReachedLimit.value = false;
 };
 
-watch(
-  () => store.template.language,
-  (language) => locale.value = language
-)
+watch(() => store.template.language, (language) => locale.value = language);
+
 </script>
 
 <style scoped>

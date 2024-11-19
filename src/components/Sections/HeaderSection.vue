@@ -5,35 +5,29 @@
 
     <div class="section-content" v-if="theComponent">
 
+      <!-- Tabs Section -->
       <div class="header-options p-1">
-        <label class="header-option option" :class="{ active: theComponent.format == `NONE` }">
-          <input type="radio" v-model="theComponent.format" value="NONE" class="visually-hidden" />
-          <span class="option-text">{{ $t('header.options.none') }}</span>
-        </label>
-        <label class="header-option option" :class="{ active: theComponent.format == `TEXT` }">
-          <input type="radio" v-model="theComponent.format" value="TEXT" class="visually-hidden" />
+        <template v-for="option in ['NONE', 'TEXT', 'IMAGE']" :key="option">
+          <label class="header-option option" :class="{ active: theComponent.format == option.toUpperCase() }">
+            <input type="radio" v-model="theComponent.format" :value="option.toUpperCase()" class="visually-hidden" />
 
-          <img width="16" height="16" src="/src/assets/images/text.svg" alt="text option-icon" />
+            <img v-if="option !== 'NONE'" width="16" height="16" alt="image option-icon"
+              :src="`/src/assets/images/${option.toLowerCase()}.svg`" />
 
-          <span class="option-text">{{ $t('header.options.text') }}</span>
-        </label>
-
-        <label class="header-option option" :class="{ active: theComponent.format == `IMAGE` }">
-          <input type="radio" v-model="theComponent.format" value="IMAGE" class="visually-hidden" />
-          <img width="16" height="16" src="/src/assets/images/image.svg" alt="image option-icon" />
-
-          <span class="option-text">{{ $t('header.options.image') }}</span>
-        </label>
+            <span class="option-text">{{ $t(`header.options.${option.toLowerCase()}`) }}</span>
+          </label>
+        </template>
       </div>
 
+      <!-- headerText & FileUploader Section -->
       <div v-if="theComponent.format === 'TEXT'" class="form-group has-validation position-relative">
         <label for="headerText" class="form-label"> {{ $t('header.options.text') }} <span
             class="required-asterisk">*</span></label>
         <input id="headerText" v-model="headerText" @input="updateHeaderText" type="text" class="form-input"
-          :class="{ 'is-invalid border-danger': headerText.length < 5 && store.formErrors.headerTextEmpty }"
+          :class="{ 'is-invalid border-danger': headerText?.length < 5 && store.formErrors.headerTextEmpty }"
           :placeholder="$t('header.textHelp')" required />
 
-        <div class="invalid-tooltip" style="margin-top: -25px;"> The Header text is required </div>
+        <div class="invalid-tooltip">{{ $t('header.textError') }} </div>
       </div>
 
       <FileUploader v-if="theComponent.format === 'IMAGE'" :theComponent="theComponent"
@@ -43,24 +37,20 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, nextTick } from 'vue';
+import { ref, computed } from 'vue';
 import { useTemplateStore } from '@/stores/templateStore';
 import FileUploader from '@/components/FormElements/FileUploader.vue';
 const store = useTemplateStore();
 
-const theComponent = ref({ "type": "HEADER", "format": "", "value": "" })
-
+const theComponent = computed(() =>
+  store.template.components?.find(component => component.type === 'HEADER') || {}
+);
 const headerImage = ref('');
-const headerText = ref(theComponent.format == "TEXT" ? theComponent.value?.text : "")
+const headerText = ref(theComponent.value.format == "TEXT" ? theComponent.value?.text : "")
 
-
-onMounted(async () => {
-  await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'HEADER');
-})
 
 function updateHeaderText(e) {
-  const value = e.target.value; // console.log('update', value);
+  const value = e.target.value;
   theComponent.value.value = { "text": value };
 }
 

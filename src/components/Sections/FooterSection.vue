@@ -14,14 +14,11 @@
 
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
-import { useTemplateStore } from '@/stores/templateStore';
-
+import { computed } from 'vue';
+import { useTemplateStore } from '@/stores/templateStore'; 
 const store = useTemplateStore();
-const theComponent = ref({ "type": "FOOTER", "text": "Powered by arabot" })
-
-onMounted(async () => {
-  await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'FOOTER');
-}) 
+  
+const theComponent = computed(() =>
+  store.template.components?.find(component => component.type === 'FOOTER') || {}   
+);
 </script>

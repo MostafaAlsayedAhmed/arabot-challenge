@@ -55,6 +55,6 @@ function handleFileUploader(e) {
         </div>
 
         
-        <div class="invalid-tooltip" style="margin-top: 5px;"> The Image is required </div>
+        <div class="invalid-tooltip" style="margin-top: 5px;">  {{ $t('header.imageUpload.error') }}</div>
     </div>
 </template>

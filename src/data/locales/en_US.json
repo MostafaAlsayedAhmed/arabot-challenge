@@ -28,18 +28,21 @@
         },
         "textInput": "Header Text",
         "textHelp": "Enter the text for your header",
+        "textError": "The Header text is required",
         "imageUpload": {
             "description": "Drag and drop file here to upload or",
             "browse": "Browse",
             "types": "Allowed types .jpeg, .jpg, .png",
             "selectInput": "Select File",
-            "replaceInput": "Replace the image"
+            "replaceInput": "Replace the image",
+            "error": "The image is required"
         }
     },
     "body": {
         "title": "Body",
         "description": "Enter the text of your message in the language you've selected",
-        "help": " Main content of the message. e.g. \"Welcome to our service!\""
+        "help": " Main content of the message. e.g. \"Welcome to our service!\"",
+        "error": "The body text is required"
     },
     "footer": {
         "title": "Footer",
@@ -62,17 +65,20 @@
             "call": "Phone Number"
         },
         "text": {
-            "title": "Button Text"
+            "title": "Button Text",
+            "error": "Required Input" 
         },
         "url": {
             "title": "Website URL",
             "help": "https://arabot.io/",
-            "textHelp": "Offer Details"
+            "textHelp": "Offer Details",
+            "error": "A valid Url is Required" 
         },
         "call": {
             "title": "Phone Number",
             "help": "+96 279 XXXXXXX",
-            "textHelp": "Call Us"
+            "textHelp": "Call Us",
+            "error": "A valid Phone Number is Required" 
         }
     },
     "previewButton": {

@@ -37,6 +37,8 @@ export const useTemplateStore = defineStore('templateStore', {
         getCategories: (state) => state.availableCategories,
         getAavailableComponents: (state) => state.template?.components?.map(comp => comp.type),
 
+        getfooterText: (state) => state.template.components?.find(component => component.type == 'FOOTER'),
+
         getTemplateMessage: (state) => {
             // return state.template
             function getComponent(targetType) {
@@ -88,10 +90,10 @@ export const useTemplateStore = defineStore('templateStore', {
         setButtonsStatus(status) {
             this.isThereButtonsSection = status;
         },
-        
+
         setPhoneNumber(buttonIndex, newNumber) {
             const buttonsComponent = this.template.components.find((component) => component.type === 'BUTTONS');
-            buttonsComponent.buttons[buttonIndex].value.phone_number = newNumber; 
+            buttonsComponent.buttons[buttonIndex].value.phone_number = newNumber;
         },
 
         // Add/Remove button - in "BUTTONS" component
@@ -139,7 +141,7 @@ export const useTemplateStore = defineStore('templateStore', {
             // validate Inputs
             this.formErrors.templateNameEmpty = (this.template.name?.length < 5) ? true : false;
             this.formErrors.bodyTextEmpty = (bodyComponent?.text.trim()?.length < 5) ? true : false;
- 
+
             if (headerComponent?.format == 'TEXT') {
                 this.formErrors.headerTextEmpty = (headerComponent.value.url || headerComponent.value.text?.trim().length < 5) ? true : false;
             } else if (headerComponent?.format == 'IMAGE') {
@@ -164,12 +166,11 @@ export const useTemplateStore = defineStore('templateStore', {
 
                 return errors;
             });
-  
+
             // Check if there are any errors
             const hasErrors =
                 this.formErrors.templateNameEmpty ||
-                this.formErrors.headerTextEmpty ||
-                this.formErrors.headerImageEmpty ||
+                this.formErrors.headerTextEmpty || this.formErrors.headerImageEmpty ||
                 this.formErrors.bodyTextEmpty ||
                 this.formErrors.buttons.some((buttonErrors) => buttonErrors.phone_number || buttonErrors.url);
 
@@ -183,17 +184,17 @@ export const useTemplateStore = defineStore('templateStore', {
                 const buttonsComponent = finalTemplateObject.components.find((component) => component.type === 'BUTTONS');
 
                 buttonsComponent?.buttons.slice().map((btn) => {
-                    if (btn.type === 'URL') btn.value = { url: btn.value.url } 
-                    if (btn.type === 'CALL') btn.value = { phone_number: btn.value.phone_number } 
+                    if (btn.type === 'URL') btn.value = { url: btn.value.url }
+                    if (btn.type === 'CALL') btn.value = { phone_number: btn.value.phone_number }
                 })
 
                 const confirmed = confirm(`Are you sure that you want to download ${this.template.name} template?`);
                 if (confirmed) downloadJSON(finalTemplateObject, `${this.template.name}_template.json`);
 
-                alert('Template is valid and Saved Successfully! 🎉');
+                alert('Template is Valid and Saved Successfully! 🎉');
             } else {
                 alert('Please correct the errors in the form.');
             }
-        } 
+        }
     },
 });

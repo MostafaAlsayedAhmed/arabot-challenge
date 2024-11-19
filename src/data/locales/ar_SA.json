@@ -28,18 +28,21 @@
         },
         "textInput": "نص العنوان",
         "textHelp": "أدخل النص للعنوان",
+        "textError": "The Header text is required",
         "imageUpload": {
             "description": "اسحب الملف هنا لتحميله أو",
             "browse": "تصفح",
             "types": "الأنواع المسموح بها .jpeg, .jpg, .png",
             "selectInput": "اختر الملف",
-            "replaceInput": "استبدال الصورة"
+            "replaceInput": "استبدال الصورة",
+            "error": "الصورة مطلوبة"
         }
     },
     "body": {
         "title": "النص الأساسي",
         "description": "أدخل نص الرسالة باللغة التي اخترتها",
-        "help": "المحتوى الرئيسي للرسالة. مثل \"مرحبًا بك في خدمتنا!\""
+        "help": "المحتوى الرئيسي للرسالة. مثل \"مرحبًا بك في خدمتنا!\"",
+        "error": "النص الأساسي مطلوب"
     },
     "footer": {
         "title": "التذييل",
@@ -62,17 +65,20 @@
             "call": "رقم الهاتف"
         },
         "text": {
-            "title": "نص الزر"
+            "title": "نص الزر",
+            "error": "المدخلات المطلوبة" 
         },
         "url": {
             "title": "رابط الموقع",
             "help": "https: //arabot.io/",
-            "textHelp": "تفاصيل العرض"
+            "textHelp": "تفاصيل العرض",
+            "error": "مطلوب عنوان صالح" 
         },
         "call": {
             "title": "رقم الهاتف",
             "help": "+96 279 XXXXXXX",
-            "textHelp": "اتصل بنا"
+            "textHelp": "اتصل بنا",
+            "error": "رقم الهاتف الصحيح مطلوب" 
         }
     },
     "previewButton": {
