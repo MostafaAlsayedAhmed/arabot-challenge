@@ -25,7 +25,7 @@
         <div v-show="store.isThereButtonsSection == 'true'">
           <button @click.stop.prevent.self="store.addButton()" id="addNewButton"
             class="btn btn-outline-success mt-2 mb-4 mt-md-2 mb-md-3 mx-sm-5 rounded-3 w-auto px-3 justify-content-center border transition">
-            {{ $t('buttons.add') }} </button>
+           + {{ $t('buttons.add') }} </button>
         </div>
       </div>
 
@@ -55,46 +55,53 @@
                 </div>
 
                 <div class="col-sm-6 col-xl-3 col-xxl-3">
-
-                  <div class="form-group">
+                  <div class="form-group has-validation position-relative">
                     <label :for="'buttonText' + actionButtonIndex" class="form-label">
                       {{ $t('buttons.text.title') }}
                       <span class="required-asterisk">*</span>
                     </label>
                     <input @keydown.enter.prevent :id="'buttonText' + actionButtonIndex" v-model="actionButton.text"
                       type="text" class="form-input" required aria-required="true"
+                      :class="{ 'is-invalid border-danger': actionButton.text.length < 1 && store.formErrors.buttons[actionButtonIndex]?.text }"
                       :placeholder="actionButton.type === 'URL' ? $t('buttons.url.textHelp') : $t('buttons.call.textHelp')" />
-                  </div> 
+                    <div class="invalid-tooltip"> Required Input </div>
+                  </div>
                 </div>
 
+
+
                 <div class="col-lg-6 col-xxl-6">
-                  <div v-if="actionButton.type === 'URL'" class="form-group">
+                  <div v-if="actionButton.type === 'URL'" class="form-group has-validation position-relative">
                     <label :for="'buttonUrl' + actionButtonIndex" class="form-label">
                       {{ $t('buttons.url.title') }}
                       <span class="required-asterisk">*</span>
                     </label>
-                    <input  @keydown.enter.prevent :id="'buttonUrl' + actionButtonIndex" v-model="actionButton.value.url"
-                      type="url" class="form-input" style="direction: ltr;" required aria-required="true" />
-                    </div>
-                    
+                    <input @keydown.enter.prevent :id="'buttonUrl' + actionButtonIndex" v-model="actionButton.value.url"
+                      type="url" class="form-input" placeholder="https://arabot.io"
+                      :class="{ 'is-invalid border-danger': !store.validUrlRegEx.test(actionButton.value.url) && store.formErrors.buttons[actionButtonIndex]?.url }"
+                      style="direction: ltr;" required aria-required="true" />
+                    <!-- actionButton.value.url.length < 1  -->
 
-                  <div v-if="actionButton.type === 'CALL'" class="form-group">
+                    <div class="invalid-tooltip"> A valid Url is Required </div>
+                  </div>
+
+
+
+                  <div v-if="actionButton.type === 'CALL'" class="form-group has-validation position-relative">
                     <label for="buttonPhoneNumber" class="form-label">
                       {{ $t('buttons.call.title') }}
                       <span class="required-asterisk">*</span>
                     </label>
 
-                    <PhoneNumber :actionButtonIndex="`${actionButtonIndex}`" />
-
+                    <PhoneNumber :actionButtonIndex="`${actionButtonIndex}`" /> 
                   </div>
 
-                  <!-- :disabled="actionButton.text.length == 0" -->
-                  <!-- <small id="error" class="input-error">Invalid phone number</small> -->
+
                 </div>
               </div>
             </div>
 
-            <button class="btn del btn-remove m-auto" @click.prevent="removeBtn(actionButtonIndex)">
+            <button class="btn del btn-remove m-auto" @click.prevent="store.removeButton(actionButtonIndex)">
               <img width="16" height="16" src="/src/assets/images/delete-btn.svg" alt="delete-btn" />
             </button>
           </div>
@@ -117,42 +124,16 @@ const store = useTemplateStore();
 const theComponent = ref({
   "type": "BUTTONS",
   "buttons": [
-    {
-      "type": "URL",
-      "text": "",
-      "value": {
-        "url": "https://arabot.io"
-      }
-    },
-    {
-      "type": "CALL",
-      "text": "",
-      "value": {
-        "phone_number": "+96279XXXXXXX"
-      }
-    }
+    { "type": "URL", "text": "", "value": { "url": "" } },
+    { "type": "CALL", "text": "", "value": { "phone_number": "" } }
   ]
 });
-
-const buttonType = ref('');
-const phoneVumber = ref('');
-buttonType.value = computed(() => store.buttonType)
-
-
-
-function removeBtn(actionButtonIndex) {
-  const confirmed = confirm(`Are you sure that you want to remove button NO. ${actionButtonIndex + 1}?`);
-  if (confirmed)
-    store.removeButton(actionButtonIndex)
-}
-
-
+   
+ 
 onMounted(async () => {
   await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'BUTTONS')
-  // console.log("BUTTONS: ", theComponent.value); //buttons
-})
-
+  theComponent.value = store.template.components?.find(component => component.type == 'BUTTONS');
+}) 
 </script>
 
 
@@ -173,7 +154,8 @@ select.form-select {
   transform: translateY(-50%);
   pointer-events: none;
   color: #000;
-} 
+}
+
 .input-error {
   color: red;
   display: block;

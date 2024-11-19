@@ -10,7 +10,7 @@
 
           <main class="main-content" :class="store.template.language === 'ar_SA' ? 'direction-rtl' : ''">
             <div class="template-form-container">
-              <form class="template-form needs-validation" novalidate >
+              <form class="template-form needs-validation" novalidate>
                 <TemplateDetails />
                 <TemplateCategory />
 
@@ -53,9 +53,7 @@
 
 <script setup>
 import { useTemplateStore } from '@/stores/templateStore';
-import { ref, reactive, watch, onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
-
-
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 import BreadcrumbNav from '@/components/Layout/BreadcrumbNav.vue';
 import TemplateHeader from '@/components/Layout/TemplateHeader.vue';
@@ -64,12 +62,10 @@ import TemplateDetails from '@/components/Template/TemplateDetails.vue';
 import TemplateCategory from '@/components/Template/TemplateCategory.vue';
 import TemplateUiPreview from '@/components/Template/TemplateUiPreview.vue';
 
-
 import HeaderSection from '@/components/Sections/HeaderSection.vue';
 import BodySection from '@/components/Sections/BodySection.vue';
 import FooterSection from '@/components/Sections/FooterSection.vue';
 import ButtonsSection from '@/components/Sections/ButtonsSection.vue';
-
 
 import SaveButton from '@/components/Buttons/SaveButton.vue';
 
@@ -78,7 +74,6 @@ const store = useTemplateStore();
 const isSmallScreen = ref(false);
 const showPreviewMobile = ref(false);
 const currentPageTitle = "New Template Message"
-
 
 const checkWindowSize = () => {
   if (window.innerWidth < 992) {
@@ -91,13 +86,14 @@ const checkWindowSize = () => {
   // console.log("isSmallScreen", isSmallScreen.value, window.innerWidth);
 }
 
+
 onMounted(async () => {
   await store.loadTemplate();
+
   if (store.template.category) store.selectCategory(store.template.category);
 
   checkWindowSize() // For Small Screens 
-  //  Add event listener to handle window resize
-  window.addEventListener("resize", checkWindowSize);
+  window.addEventListener("resize", checkWindowSize);  //  Add event listener to handle window resize
 })
 
 onBeforeUnmount(() => {
@@ -120,9 +116,10 @@ onBeforeUnmount(() => {
   position: fixed;
   right: 30px;
   bottom: 40px;
-  z-index: 5;
+  z-index: 11;
   width: 85px;
-  height: 60px;
+  height: 50px;
+  line-height: 18px;
   border-radius: 10px;
   background: #9b7cb7 !important;
   color: #fff !important;

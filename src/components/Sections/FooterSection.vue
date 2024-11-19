@@ -1,9 +1,8 @@
 <template>
   <section class="form-section footer-section">
     <h2 class="section-title">{{ $t('footer.title') }}</h2>
-    <p class="section-description">{{ $t('footer.description') }}
+    <p class="section-description">{{ $t('footer.description') }} </p>
 
-    </p>
     <div class="form-group section-content">
       <label for="footerText" class="visually-hidden">{{ $t('footer.title') }}</label>
       <input id="footerText" v-model="theComponent.text" type="text" class="form-input"
@@ -20,11 +19,9 @@ import { useTemplateStore } from '@/stores/templateStore';
 
 const store = useTemplateStore();
 const theComponent = ref({ "type": "FOOTER", "text": "Powered by arabot" })
-const footerText = ref("");
 
 onMounted(async () => {
   await nextTick();
-  theComponent.value = store.template.components?.find(component => component.type == 'FOOTER')
-  // console.log("FOOTER: ", theComponent.value);
+  theComponent.value = store.template.components?.find(component => component.type == 'FOOTER');
 }) 
 </script>

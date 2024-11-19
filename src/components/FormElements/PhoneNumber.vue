@@ -15,7 +15,7 @@ const inputOptions = {
     id: 'buttonPhoneNumber' + actionButtonIndex,
     showDialCode: true,
     placeholder: '07 XXXX XXXX',
-    styleClasses: 'form-input phone-input',
+    styleClasses: `form-input phone-input ${store.formErrors.buttons[actionButtonIndex]?.phone_number ? 'is-invalid border-danger' : ''} `,
     pattern: "^[+]?[0-9]{10,14}$"
 };
 </script>
@@ -23,8 +23,12 @@ const inputOptions = {
 <template>
     <div class="phone-input-wrapper flex-md-row">
         <VueTelInput v-model="phone" mode="international" @keydown.enter.prevent
-            @input="store.setPhoneNumber(actionButtonIndex, phone)" styleClasses="gap-2 border-0"
-            :inputOptions="inputOptions" />
+            @input="store.setPhoneNumber(actionButtonIndex, phone)" :inputOptions="inputOptions"
+            styleClasses="gap-2 border-0" />
+        <div class="invalid-tooltip"
+            :class="{ 'd-block': !store.validPhoneNumberRegEx.test(phone) && store.formErrors.buttons[actionButtonIndex]?.phone_number }">
+            A valid Phone Number is Required
+        </div>
     </div>
 </template>
 
@@ -46,5 +50,9 @@ const inputOptions = {
     border-radius: 8px;
     font-size: 14px;
     height: 40px;
+}
+
+.vue-tel-input + .invalid-tooltip {
+    margin-left: 4rem;
 }
 </style>

@@ -84,7 +84,7 @@
   .message-bubble {
     background-color: #fff;
     border-radius: 0 12px 12px 12px;
-    padding: 10px;
+    padding: 10px;  padding-bottom: 0px;
     position: relative;
 
     &:before {
@@ -122,6 +122,7 @@
     align-items: center;
     font-size: $font-size-small;
     color: #666;
+    margin-bottom: 12px;
   }
 
   .message-time {
@@ -130,7 +131,7 @@
   }
 
   .message-buttons {
-    margin-top: 12px;
+    // margin-top: 12px;
     // margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -193,6 +194,8 @@
     .preview-container {
       top: 40px;
       right: unset;
+      z-index: 10;
+      
       .mobile-preview {
         height: calc(100vh - 80px);
         min-height: 300px;
@@ -200,12 +203,13 @@
       }
     }
 
-    .message-body {
+    .message-body { 
+      
       max-height: calc(100vh - 260px);
       max-height: calc(100vh - 280px);
       overflow-x: clip; //auto;
       overflow-y: auto;
-      margin-bottom: -10px;
+      // margin-bottom: -10px;
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none; /* Hides scrollbar for Chrome, Safari, Edge */
