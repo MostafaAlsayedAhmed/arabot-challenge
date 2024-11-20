@@ -12,7 +12,7 @@
             <input type="radio" v-model="theComponent.format" :value="option.toUpperCase()" class="visually-hidden" />
 
             <img v-if="option !== 'NONE'" width="16" height="16" alt="image option-icon"
-              :src="`/src/assets/images/${option.toLowerCase()}.svg`" />
+              :src="`/assets/images/${option.toLowerCase()}.svg`" />
 
             <span class="option-text">{{ $t(`header.options.${option.toLowerCase()}`) }}</span>
           </label>
